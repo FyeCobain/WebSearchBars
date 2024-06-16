@@ -2,6 +2,7 @@
 class Website {
     ; Static attributes
     static TermTemplate := "${A_TermTemplate}"
+    static DefaultBrowser := "Firefox"
 
     ; Constructor
     __New(Title, HomeURL := "", SearchURL := "") {
@@ -10,12 +11,9 @@ class Website {
         this.SearchURL := SearchURL
     }
 
-    ; Creates the final search URL
+    ; Returns the search URL
     GetSearchURL(SearchTerm) {
-        if !this.SearchURL
-            return SearchTerm
-
-        return StrReplace(this.SearchURL, Website.TermTemplate, StrReplace(SearchTerm, "`n", "%0A"))
+        return !this.SearchURL ? SearchTerm : StrReplace(this.SearchURL, Website.TermTemplate, SearchTerm)
     }
 }
 

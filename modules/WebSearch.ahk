@@ -1,5 +1,5 @@
 ; Creates and displays the web search bar for the indicated website
-ShowSearchGui(WebsiteObj, Private := False, Multiline := False) {
+ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := Website.DefaultBrowser) {
     global SearchGui
     if IsSet(SearchGui)
         DestroySearchGui()
@@ -8,9 +8,10 @@ ShowSearchGui(WebsiteObj, Private := False, Multiline := False) {
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner")
     SetIcon()
     WinSetTransparent 245
+    SearchGui.WebsiteObj := WebsiteObj
     SearchGui.Private := !Private
     SearchGui.Multiline := Multiline
-    SearchGui.WebsiteObj := WebsiteObj
+    SearchGui.Browser := Browser
     TogglePrivateSearch()
     SearchGui.OnEvent("Close", GuiObj => DestroySearchGui())
     SearchGui.SetFont("s13 c25003E", "Tahoma")
@@ -30,7 +31,7 @@ DestroySearchGui() {
 
 ; Toggles the multiline search by creating a new search bar
 ToggleMultilineSearch() {
-    ShowSearchGui(SearchGui.WebsiteObj, SearchGui.Private, !SearchGui.Multiline)
+    ShowSearchGui(SearchGui.WebsiteObj, SearchGui.Private, !SearchGui.Multiline, SearchGui.Browser)
 }
 
 ; Toggles the private search by updating the search bar
@@ -42,9 +43,10 @@ TogglePrivateSearch() {
 
 ; Submits the search bar
 SubmitSearch() {
+    SearchTerm := SearchGui['EditSearchTerm'].Value
     WebsiteObj := SearchGui.WebsiteObj
     Private := SearchGui.Private
-    SearchTerm := SearchGui['EditSearchTerm'].Value
+    Browser := SearchGui.Browser
     
     if !SearchGui.WebsiteObj
         URL := SearchTerm
@@ -55,11 +57,18 @@ SubmitSearch() {
 
     if URL {
         DestroySearchGui()
-        OpenURL(URL)
+        OpenURL(URL, Private, Browser)
     }
 }
 
-; Opens the final URL in the indicated browser
-OpenURL(URL) {
-    ; TODO
+; Opens the URL in the given mode and browser
+OpenURL(URL, Private := False, Browser := Website.DefaultBrowser) {
+    URL := StrReplace(URL, "`n", "%0A")
+    URL := StrReplace(URL, '"', '\"')
+    URL := '"' . URL . '"'
+
+    if StrLower(Browser) == "firefox"
+        Run "Firefox.exe " (Private ? "--private-window " URL : URL)
+    else
+        Run Browser ".exe " (Private ? "-incognito " URL : URL)
 }
