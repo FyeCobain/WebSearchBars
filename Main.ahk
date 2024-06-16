@@ -27,12 +27,12 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submits a single line search
 ^>R Up:: OpenURL("https://github.com/FyeCobain") ; GitHub Repositories
 
 ; Open web search bars
->^O Up:: ShowSearchGui("Open URL") ; Right Ctrl + O
->^E Up:: ShowSearchGui("Ecosia") ; Right Ctrl + E
->^G Up:: ShowSearchGui("Google") ; Right Ctrl + G
->^T Up:: ShowSearchGui("Google Translate") ; Right Ctrl + T
->^I Up:: ShowSearchGui("Images") ; Right Ctrl + I
->^Y Up:: ShowSearchGui("YouTube") ; Right Ctrl + Y
->^F Up:: ShowSearchGui("Flaticon") ; Right Ctrl + F
->^D Up:: ShowSearchGui("Docker Hub") ; Right Ctrl + D
->^C Up:: ShowSearchGui("Can I Use") ; Right Ctrl + C
+>^O Up:: ShowSearchGui(URLSearch) ; Right Ctrl + O
+>^E Up:: ShowSearchGui(EcosiaSearch) ; Right Ctrl + E
+>^G Up:: ShowSearchGui(GoogleSearch) ; Right Ctrl + G
+>^T Up:: ShowSearchGui(TranslateSearch) ; Right Ctrl + T
+>^I Up:: ShowSearchGui(ImagesSearch) ; Right Ctrl + I
+>^Y Up:: ShowSearchGui(YouTubeSearch) ; Right Ctrl + Y
+>^F Up:: ShowSearchGui(FlatIconSearch) ; Right Ctrl + F
+>^D Up:: ShowSearchGui(DockerHubSearch) ; Right Ctrl + D
+>^C Up:: ShowSearchGui(CanIUseSearch) ; Right Ctrl + C

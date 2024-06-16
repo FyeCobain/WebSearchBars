@@ -1,41 +1,43 @@
 ; Creates and displays the web search bar for the indicated website
-ShowSearchGui(Web, Private := False, Multiline := False) {
+ShowSearchGui(WebsiteObj, Private := False, Multiline := False) {
     global SearchGui
     if IsSet(SearchGui)
         DestroySearchGui()
 
-    SetIcon(Web)
+    SetIcon(WebsiteObj.Title)
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner")
     SetIcon()
     WinSetTransparent 245
     SearchGui.Private := !Private
     SearchGui.Multiline := Multiline
-    SearchGui.WebsiteObj := Website.FindWebsiteObject(Web)
+    SearchGui.WebsiteObj := WebsiteObj
+    TogglePrivateSearch()
     SearchGui.OnEvent("Close", GuiObj => DestroySearchGui())
     SearchGui.SetFont("s13 c25003E", "Tahoma")
     EditSearch := SearchGui.AddEdit("+WantTab vEditSearchTerm w444 x2 y2 " (!Multiline ? "-WantReturn" : "r4"))
     SearchGui.Show("w448 h" . (!Multiline ? 33 : 96))
-    TogglePrivateSearch()
-    ControlFocus EditSearch
+    Try
+        ControlFocus EditSearch
 }
 
 ; Destroys the search bar
 DestroySearchGui() {
     global SearchGui
-    SearchGui.Destroy()
+    Try
+        SearchGui.Destroy()
     SearchGui := unset
 }
 
 ; Toggles the multiline search by creating a new search bar
 ToggleMultilineSearch() {
-    ShowSearchGui(SearchGui.WebsiteObj.Name, SearchGui.Private, !SearchGui.Multiline)
+    ShowSearchGui(SearchGui.WebsiteObj, SearchGui.Private, !SearchGui.Multiline)
 }
 
 ; Toggles the private search by updating the search bar
 TogglePrivateSearch() {
     SearchGui.Private := !SearchGui.Private
     SearchGui.BackColor := !SearchGui.Private ? "F9F9FB" : "8000D7"
-    SearchGui.Title := !SearchGui.Private ? SearchGui.WebsiteObj.Name : SearchGui.WebsiteObj.Name " (Private)"
+    SearchGui.Title := !SearchGui.Private ? SearchGui.WebsiteObj.Title : SearchGui.WebsiteObj.Title " (Private)"
 }
 
 ; Submits the search bar
