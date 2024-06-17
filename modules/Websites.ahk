@@ -2,7 +2,6 @@
 class Website {
     ; Static attributes
     static TermTemplate := "A_TermTemplate"
-    static DefaultBrowser := "Firefox"
 
     ; Constructor
     __New(Title, HomeURL := "", SearchURL := "") {
@@ -34,8 +33,8 @@ GoogleSearch := Website(
 
 TranslateSearch := Website(
     "Translate",
-    "https://translate.google.com.mx/?hl=es&sl=auto&tl=es&op=translate",
-    "https://translate.google.com.mx/?hl=es&sl=auto&tl=es&text=" Website.TermTemplate "&op=translate"
+    "https://translate.google.com.mx/?hl=" TargetLang "&sl=auto&tl=" TargetLang "&op=translate",
+    "https://translate.google.com.mx/?hl=" TargetLang "&sl=auto&tl=" TargetLang "&text=" Website.TermTemplate "&op=translate"
 )
 
 ImagesSearch := Website(

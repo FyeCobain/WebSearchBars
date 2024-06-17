@@ -1,6 +1,10 @@
 ﻿; DIRECTIVES
 #Requires AutoHotkey v2.0
 
+; VARIABLES
+TargetLang := "es" ; Translation target language
+DefaultBrowser := "Firefox" ; 'Firefox(.exe)' | 'Brave(.exe)' | 'Chrome(.exe)'...
+
 ; INCLUDES
 #Include %A_WorkingDir%\modules\Config.ahk
 #Include %A_WorkingDir%\modules\Websites.ahk

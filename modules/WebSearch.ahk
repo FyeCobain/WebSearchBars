@@ -1,5 +1,5 @@
 ; Creates and displays the web search bar for the indicated website
-ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := Website.DefaultBrowser) {
+ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := DefaultBrowser) {
     global SearchGui
     if IsSet(SearchGui)
         DestroySearchGui()
@@ -62,7 +62,7 @@ SubmitSearch() {
 }
 
 ; Opens the URL in the given mode and browser
-OpenURL(URL, Private := False, Browser := Website.DefaultBrowser) {
+OpenURL(URL, Private := False, Browser := DefaultBrowser) {
     URL := StrReplace(URL, "`n", "%0A")
     URL := StrReplace(URL, '"', '\"')
     URL := '"' . URL . '"'
