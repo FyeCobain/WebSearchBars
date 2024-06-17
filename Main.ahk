@@ -8,17 +8,17 @@
 
 ; CONTEXT-SENSITIVE HOTKEYS
 #HotIf IsSet(SearchGui)
-Esc Up:: DestroySearchGui() ; 'Escape' => Closes the search bar
+Esc Up:: DestroySearchGui() ; 'Escape' => Close the search bar
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd)
-Alt Up:: ToggleMultilineSearch() ; 'Left Alt' => Toggles the multiline search
-RAlt Up:: TogglePrivateSearch() ; 'Right Alt' => Toggles the private search
+Alt Up:: ToggleMultilineSearch() ; 'Left Alt' => Toggle multiline search
+RAlt Up:: TogglePrivateSearch() ; 'Right Alt' => Toggle private search
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && !SearchGui.Multiline
-Enter Up:: SubmitSearch() ; 'Enter' => Submits a single line search
+Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && SearchGui.Multiline
-^Enter Up:: SubmitSearch() ; 'Ctrl + Enter' => Submits a multiline search
+^Enter Up:: SubmitSearch() ; 'Ctrl + Enter' => Submit a multiline search
 #HotIf
 
 ; HOTKEYS
@@ -27,12 +27,12 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submits a single line search
 ^>R Up:: OpenURL("https://github.com/FyeCobain") ; GitHub Repositories
 
 ; Open web search bars
->^O Up:: ShowSearchGui(URLSearch) ; Right Ctrl + O
->^E Up:: ShowSearchGui(EcosiaSearch) ; Right Ctrl + E
->^G Up:: ShowSearchGui(GoogleSearch) ; Right Ctrl + G
->^T Up:: ShowSearchGui(TranslateSearch) ; Right Ctrl + T
->^I Up:: ShowSearchGui(ImagesSearch) ; Right Ctrl + I
->^Y Up:: ShowSearchGui(YouTubeSearch) ; Right Ctrl + Y
->^F Up:: ShowSearchGui(FlatIconSearch) ; Right Ctrl + F
->^D Up:: ShowSearchGui(DockerHubSearch) ; Right Ctrl + D
->^C Up:: ShowSearchGui(CanIUseSearch) ; Right Ctrl + C
+>^O Up:: ShowSearchGui(URLSearch) ; RCtrl + O
+>^E Up:: ShowSearchGui(EcosiaSearch) ; RCtrl + E
+>^G Up:: ShowSearchGui(GoogleSearch) ; RCtrl + G
+>^T Up:: ShowSearchGui(TranslateSearch) ; RCtrl + T
+>^I Up:: ShowSearchGui(ImagesSearch) ; RCtrl + I
+>^Y Up:: ShowSearchGui(YouTubeSearch) ; RCtrl + Y
+>^F Up:: ShowSearchGui(FlatIconSearch) ; RCtrl + F
+>^D Up:: ShowSearchGui(DockerHubSearch) ; RCtrl + D
+>^C Up:: ShowSearchGui(CanIUseSearch) ; RCtrl + C
