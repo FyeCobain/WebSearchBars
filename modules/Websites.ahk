@@ -1,7 +1,7 @@
-; Website class
+; 'Website' class
 class Website {
     ; Static attributes
-    static TermTemplate := "${A_TermTemplate}"
+    static TermTemplate := "A_TermTemplate"
     static DefaultBrowser := "Firefox"
 
     ; Constructor
