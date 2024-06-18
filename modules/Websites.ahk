@@ -1,7 +1,7 @@
 ; 'Website' class
 class Website {
     ; Static attributes
-    static TermTemplate := "A_TermTemplate"
+    static TermTemplate := "A_TermTemplate_" A_TickCount
 
     ; Constructor
     __New(Title, HomeURL := "", SearchURL := "") {
@@ -33,14 +33,14 @@ GoogleSearch := Website(
 
 TranslateSearch := Website(
     "Translate",
-    "https://translate.google.com.mx/?hl=" TargetLang "&sl=auto&tl=" TargetLang "&op=translate",
-    "https://translate.google.com.mx/?hl=" TargetLang "&sl=auto&tl=" TargetLang "&text=" Website.TermTemplate "&op=translate"
+    "https://translate.google.com.mx/?hl=" TranslationTargetLang "&sl=auto&tl=" TranslationTargetLang "&op=translate",
+    "https://translate.google.com.mx/?hl=" TranslationTargetLang "&sl=auto&tl=" TranslationTargetLang "&text=" Website.TermTemplate "&op=translate"
 )
 
 ImagesSearch := Website(
     "Images",
     "https://images.google.com",
-    "https://www.google.com/search?q=" Website.TermTemplate
+    "https://www.google.com/search?tbm=isch&q=" Website.TermTemplate
 )
 
 YouTubeSearch := Website(

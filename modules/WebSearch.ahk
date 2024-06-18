@@ -1,8 +1,8 @@
 ; Creates and displays the web search bar for the indicated website
-ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := DefaultBrowser) {
+ShowSearchBar(WebsiteObj, Private := False, Multiline := False, Browser := DefaultBrowser) {
     global SearchGui
     if IsSet(SearchGui)
-        DestroySearchGui()
+        DestroySearchBar()
 
     SetIcon(WebsiteObj.Title)
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner")
@@ -13,7 +13,7 @@ ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := Defau
     SearchGui.Multiline := Multiline
     SearchGui.Browser := Browser
     TogglePrivateSearch()
-    SearchGui.OnEvent("Close", GuiObj => DestroySearchGui())
+    SearchGui.OnEvent("Close", GuiObj => DestroySearchBar())
     SearchGui.SetFont("s13 c25003E", "Tahoma")
     EditSearch := SearchGui.AddEdit("+WantTab vEditSearchTerm w444 x2 y2 " (!Multiline ? "-WantReturn" : "r4"))
     SearchGui.Show("w448 h" . (!Multiline ? 33 : 96))
@@ -22,7 +22,7 @@ ShowSearchGui(WebsiteObj, Private := False, Multiline := False, Browser := Defau
 }
 
 ; Destroys the search bar
-DestroySearchGui() {
+DestroySearchBar() {
     global SearchGui
     Try
         SearchGui.Destroy()
@@ -31,14 +31,14 @@ DestroySearchGui() {
 
 ; Toggles the multiline search by creating a new search bar
 ToggleMultilineSearch() {
-    ShowSearchGui(SearchGui.WebsiteObj, SearchGui.Private, !SearchGui.Multiline, SearchGui.Browser)
+    ShowSearchBar(SearchGui.WebsiteObj, SearchGui.Private, !SearchGui.Multiline, SearchGui.Browser)
 }
 
 ; Toggles the private search by updating the search bar
 TogglePrivateSearch() {
     SearchGui.Private := !SearchGui.Private
     SearchGui.BackColor := !SearchGui.Private ? "F9F9FB" : "8000D7"
-    SearchGui.Title := !SearchGui.Private ? SearchGui.WebsiteObj.Title : SearchGui.WebsiteObj.Title " (Private)"
+    SearchGui.Title := !SearchGui.Private ? SearchGui.WebsiteObj.Title : SearchGui.WebsiteObj.Title " (private)"
 }
 
 ; Submits the search bar
@@ -56,7 +56,7 @@ SubmitSearch() {
         URL := SearchGui.WebsiteObj.GetSearchURL(SearchTerm)
 
     if URL {
-        DestroySearchGui()
+        DestroySearchBar()
         OpenURL(URL, Private, Browser)
     }
 }

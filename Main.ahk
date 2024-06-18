@@ -1,10 +1,6 @@
 ﻿; DIRECTIVES
 #Requires AutoHotkey v2.0
 
-; VARIABLES
-TargetLang := "es" ; Translation target language
-DefaultBrowser := "Firefox" ; 'Firefox(.exe)' | 'Brave(.exe)' | 'Chrome(.exe)'...
-
 ; INCLUDES
 #Include %A_WorkingDir%\modules\Config.ahk
 #Include %A_WorkingDir%\modules\Websites.ahk
@@ -12,31 +8,32 @@ DefaultBrowser := "Firefox" ; 'Firefox(.exe)' | 'Brave(.exe)' | 'Chrome(.exe)'..
 
 ; CONTEXT-SENSITIVE HOTKEYS
 #HotIf IsSet(SearchGui)
-Esc Up:: DestroySearchGui() ; 'Escape' => Close the search bar
+Esc Up:: DestroySearchBar() ; 'Escape' => Close the search bar
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd)
 Alt Up:: ToggleMultilineSearch() ; 'Left Alt' => Toggle multiline search
-RAlt Up:: TogglePrivateSearch() ; 'Right Alt' => Toggle private search
+RAlt Up:: TogglePrivateSearch() ; 'Right Alt / Alt Gr' => Toggle private search
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && !SearchGui.Multiline
 Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 
 #HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && SearchGui.Multiline
-^Enter Up:: SubmitSearch() ; 'Ctrl + Enter' => Submit a multiline search
+^Enter Up:: SubmitSearch() ; 'Control + Enter' => Submit a multiline search
 #HotIf
 
 ; HOTKEYS
 
 ; Open URLs
-^>R Up:: OpenURL("https://github.com/FyeCobain") ; GitHub Repositories
+>^R Up:: OpenURL("https://github.com/FyeCobain") ; GitHub Repositories
+>^Q Up:: OpenURL("https://app.quicktype.io") ; quicktype
 
-; Open web search bars
->^O Up:: ShowSearchGui(URLSearch) ; RCtrl + O
->^E Up:: ShowSearchGui(EcosiaSearch) ; RCtrl + E
->^G Up:: ShowSearchGui(GoogleSearch) ; RCtrl + G
->^T Up:: ShowSearchGui(TranslateSearch) ; RCtrl + T
->^I Up:: ShowSearchGui(ImagesSearch) ; RCtrl + I
->^Y Up:: ShowSearchGui(YouTubeSearch) ; RCtrl + Y
->^F Up:: ShowSearchGui(FlatIconSearch) ; RCtrl + F
->^D Up:: ShowSearchGui(DockerHubSearch) ; RCtrl + D
->^C Up:: ShowSearchGui(CanIUseSearch) ; RCtrl + C
+; Show web search bars
+>^O Up:: ShowSearchBar(URLSearch) ; Right Control + O
+>^E Up:: ShowSearchBar(EcosiaSearch) ; Right Control + E
+>^G Up:: ShowSearchBar(GoogleSearch) ; Right Control + G
+>^T Up:: ShowSearchBar(TranslateSearch) ; Right Control + T
+>^I Up:: ShowSearchBar(ImagesSearch) ; Right Control + I
+>^Y Up:: ShowSearchBar(YouTubeSearch) ; Right Control + Y
+>^F Up:: ShowSearchBar(FlatIconSearch) ; Right Control + F
+>^D Up:: ShowSearchBar(DockerHubSearch) ; Right Control + D
+>^C Up:: ShowSearchBar(CanIUseSearch) ; Right Control + C
