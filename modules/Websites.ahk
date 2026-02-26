@@ -4,65 +4,47 @@ class Website {
     static TermTemplate := "A_TermTemplate_" A_TickCount
 
     ; Constructor
-    __New(Title, HomeURL := "", SearchURL := "") {
+    __New(Title, HomeURL, SearchURL) {
         this.Title := Title
         this.HomeURL := HomeURL
         this.SearchURL := SearchURL
     }
 
-    ; Returns the search URL
+    ; Creates and returns the search URL
     GetSearchURL(SearchTerm) {
         return !this.SearchURL ? SearchTerm : StrReplace(this.SearchURL, Website.TermTemplate, SearchTerm)
     }
 }
 
 ; Websites
-URLSearch := Website("Open URL")
+OpenURLSearch := Website("Open URL", "", "")
 
 EcosiaSearch := Website(
     "Ecosia",
     "https://www.ecosia.org",
-    "https://www.ecosia.org/search?method=index&q=" Website.TermTemplate
+    "https://www.ecosia.org/search?method=index&q=" . Website.TermTemplate
 )
 
 GoogleSearch := Website(
     "Google",
     "https://www.google.com",
-    "https://www.google.com/search?q=" Website.TermTemplate
+    "https://www.google.com/search?q=" . Website.TermTemplate
 )
 
 TranslateSearch := Website(
     "Translate",
-    "https://translate.google.com.mx/?hl=" TranslationTargetLang "&sl=auto&tl=" TranslationTargetLang "&op=translate",
-    "https://translate.google.com.mx/?hl=" TranslationTargetLang "&sl=auto&tl=" TranslationTargetLang "&text=" Website.TermTemplate "&op=translate"
+    "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&op=translate",
+    "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&text=" . Website.TermTemplate . "&op=translate"
 )
 
 ImagesSearch := Website(
     "Images",
     "https://images.google.com",
-    "https://www.google.com/search?tbm=isch&q=" Website.TermTemplate
+    "https://www.google.com/search?tbm=isch&q=" . Website.TermTemplate
 )
 
 YouTubeSearch := Website(
     "YouTube",
     "https://www.youtube.com",
-    "https://www.youtube.com/results?search_query=" Website.TermTemplate
-)
-
-FlatIconSearch := Website(
-    "Flaticon",
-    "https://www.flaticon.com",
-    "https://www.flaticon.com/search?word=" Website.TermTemplate
-)
-
-DockerHubSearch := Website(
-    "Docker Hub",
-    "https://hub.docker.com",
-    "https://hub.docker.com/search?q=" Website.TermTemplate
-)
-
-CanIUseSearch := Website(
-    "Can I Use",
-    "https://caniuse.com",
-    "https://caniuse.com/?search=" Website.TermTemplate
+    "https://www.youtube.com/results?search_query=" . Website.TermTemplate
 )
