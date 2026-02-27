@@ -9,9 +9,6 @@ SplitPath A_AhkPath, , &AHKDir
 SearchGuiHeight := 49
 MultilineSearchGuiHeight := 136
 
-; VARIABLES
-TranslationTargetLang := "en" ; 'en' | 'es' | 'de' ...
-
 ; Tray menu configuration
 A_IconTip := "Web Search Bars"
 A_TrayMenu.Delete()
@@ -29,8 +26,8 @@ A_TrayMenu.SetIcon("Repository / Docs", "Shell32.dll", 264)
 A_TrayMenu.Add("AutoHotkey v2 Help", (ItemName, ItemPos, MyMenu) => Run(AHKDir "\AutoHotkey.chm"))
 A_TrayMenu.SetIcon("AutoHotkey v2 Help", "Shell32.dll", 24)
 A_TrayMenu.Add()
-A_TrayMenu.Add("Run on Windows Startup", (ItemName, ItemPos, MyMenu) => ToggleRunOnStartup())
-A_TrayMenu.SetIcon("Run on Windows Startup", "Shell32.dll", 132)
+A_TrayMenu.Add("Run at startup", (ItemName, ItemPos, MyMenu) => ToggleRunOnStartup())
+A_TrayMenu.SetIcon("Run at startup", "Shell32.dll", 132)
 A_TrayMenu.Add()
 A_TrayMenu.Add("Exit", (ItemName, ItemPos, MyMenu) => ExitApp())
 A_TrayMenu.SetIcon("Exit", "Shell32.dll", 265)
@@ -62,10 +59,10 @@ SuspendScript() {
 ToggleRunOnStartup() {
     if !FileExist(A_Startup "\WebSearchBars.lnk") {
         FileCreateShortcut A_ScriptFullPath, A_Startup "\WebSearchBars.lnk", A_WorkingDir, , "Web Search Bars", A_WorkingDir "\icons\search.ico"
-        A_TrayMenu.SetIcon("Run on Windows Startup", "Shell32.dll", 295)
+        A_TrayMenu.SetIcon("Run at startup", "Shell32.dll", 295)
     }
     else {
         FileDelete A_Startup "\WebSearchBars.lnk"
-        A_TrayMenu.SetIcon("Run on Windows Startup", "Shell32.dll", 132)
+        A_TrayMenu.SetIcon("Run at startup", "Shell32.dll", 132)
     }
 }

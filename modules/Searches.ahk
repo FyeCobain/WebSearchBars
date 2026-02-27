@@ -16,7 +16,7 @@ ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivat
     SearchGui.SetFont("s13 c25003E", "Tahoma")
     EditSearch := SearchGui.AddEdit("+WantTab vEditSearchTerm x0 y0 w444 " (!Multiline ? "-WantReturn" : "r5"))
     SearchGui.Show("w444 h" (!Multiline ? SearchGuiHeight : MultilineSearchGuiHeight))
-    
+
     SearchGui.SetFont("s9 c25003E", "Tahoma")
     SearchGui.AddStatusBar("vStatusBar x30 y20")
     ControlFocus EditSearch
@@ -90,7 +90,7 @@ SubmitSearch() {
     WebsiteObj := SearchGui.WebsiteObj
     Private := SearchGui.Private
     Browser := SearchGui.Browser
-    
+
     if !SearchGui.WebsiteObj
         URL := SearchTerm
     else if SearchTerm == ""

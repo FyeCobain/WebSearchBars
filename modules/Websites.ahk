@@ -17,33 +17,33 @@ class Website {
 }
 
 ; Websites
-OpenURLSearch := Website("Open URL", "", "")
+DirectURL := Website("Open URL", "", "")
 
-EcosiaSearch := Website(
+Ecosia := Website(
     "Ecosia",
     "https://www.ecosia.org",
     "https://www.ecosia.org/search?method=index&q=" . Website.TermTemplate
 )
 
-GoogleSearch := Website(
+Google := Website(
     "Google",
     "https://www.google.com",
     "https://www.google.com/search?q=" . Website.TermTemplate
 )
 
-TranslateSearch := Website(
+Translate := Website(
     "Translate",
     "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&op=translate",
     "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&text=" . Website.TermTemplate . "&op=translate"
 )
 
-ImagesSearch := Website(
+Images := Website(
     "Images",
     "https://images.google.com",
     "https://www.google.com/search?tbm=isch&q=" . Website.TermTemplate
 )
 
-YouTubeSearch := Website(
+YouTube := Website(
     "YouTube",
     "https://www.youtube.com",
     "https://www.youtube.com/results?search_query=" . Website.TermTemplate

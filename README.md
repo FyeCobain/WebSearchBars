@@ -1,44 +1,42 @@
-# Windows Web Search Bars :mag:
+# Windows Web Search Bars :globe_with_meridians::mag:
 
-> Made with **[AutoHotkey 2.0](https://www.autohotkey.com/boards/viewtopic.php?f=24&t=112989)**
+<a name="requirements"></a>
+## Requirements
+##### Windows 7+
+
+##### [AutoHotkey v2](https://www.autohotkey.com/)
 
 [![Ecosia search screenshot](./screenshots/ecosia.png)](./screenshots/ecosia.png)
 
 [![YouTube search screenshot](./screenshots/youtube.png)](./screenshots/youtube.png)
 
+[![Images search screenshot](./screenshots/images.png)](./screenshots/images.png)
+
+[![Open URL screenshot](./screenshots/open.png)](./screenshots/open.png)
+
 ## Table of contents
-1. [Requirements :page_facing_up:](#requirements)
-2. [Usage](#usage)
-3. [Examples](#examples)
-4. [Configuration :wrench:](#configuration)
-    1. [Default browser and translation target language](#basic-config)
-    2. [Add a new direct link](#direct-link)
-    1. [Add a new search website](#search-website)
-5. [Attributions](#atributions)
-
-<a name="requirements"></a>
-## Requirements :page_facing_up:
-* Windows 7+
-
-* [AutoHotkey v2](https://www.autohotkey.com/)
+1. [Usage](#usage)
+2. [Examples](#examples)
+3. [Configuration](#configuration)
+4. [Attributions](#atributions)
 
 ---
 
 <a name="usage"></a>
-## Usage
+## 1. Usage
 
 #### [Hotkeys](https://www.autohotkey.com/docs/v2/Hotkeys.htm)
 ```
 Right Control + O => Open URL
 ```
 ```
-Right Control + [Key] => Open a search bar
+Right Control + [Web key] => Open a search bar
+```
+```
+Tab / Shift + Tab => Change browser
 ```
 ```
 Right Alt / Alt Gr => Toggle private search
-```
-```
-Right Alt / Alt Gr + [Key] => Change to another browser
 ```
 ```
 Left Alt => Toggle multiline search
@@ -53,7 +51,7 @@ Control + Enter => Submit multiline search
 ---
 
 <a name="examples"></a>
-## Examples
+## 2. Examples
 
 > #### Tip :sparkles: 
 > Leave the input blank to open the home page instead of performing a search
@@ -67,95 +65,74 @@ Control + Enter => Submit multiline search
 ###### Translation of multiline text: Right Control + T, then, Left Alt, then Ctrl + Enter
 [![Translate screenshot](./screenshots/translate.png)](./screenshots/translate.png)
 
-> :pushpin: Check the 'Main.ahk' script to see all the predefined hotkeys and search websites
+> :pushpin: Check the 'Main.ahk' script to see all the predefined hotkeys
 
 ---
 
 <a name="configuration"></a>
-## Configuration :wrench:
+## 3. Configuration
 
 <a name="basic-config"></a>
-#### Edit the 'Config.ahk' script
+#### Browsers.ahk
 
-> ##### 1. Set the default web browser
+> ##### Set the translation target language
 ```
-; 'LibreWolf' | 'Edge' | 'Brave' | 'Vivaldi' | 'Chrome' ...
-DefaultBrowser := "LibreWolf"
-```
-
-> ##### 2. Set the translation target language
-```
-; 'en' | 'es' | 'de' ...
+; 'en' | 'es' | 'de' | 'ja' ...
 TranslationTargetLang := "en"
 ```
 
-> ##### 3. Reload and test the script
-[![Reload Script screenshot](./screenshots/reload.png)](./screenshots/reload.png)
-
-----
-
-<a name="direct-link"></a>
-#### Add a new direct link
-
-> ##### 1. Add a new [hotkey](https://www.autohotkey.com/docs/v2/Hotkeys.htm) to the 'Main.ahk' script
-###### OpenURL() arguments:
-1. The URL.
-2. The web browser that will be used (optional, default if omitted).
-3. Open in private / incognito window (optional, default 'False').
-
+> ##### Add browsers
 ```
-; Right Control + A => Opens Azure in a private Firefox window
->^A Up:: OpenURL('https://azure.microsoft.com', Firefox, True)
+; ("Name", ".exe")
+Waterfox := BrowserClass("Waterfox", "waterfox")
+LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ```
 
-> ##### 2. Reload and test the script
-> _Right Control + A_
-
----
-
-<a name="search-website"></a>
-#### Add a new search website
-
-> ##### 1. Add the web .ico file
+> ##### Set the default web browser
 ```
-icons/exampleweb.ico
+; Edge | Firefox | LibreWolf | Chrome | Vivaldi ...
+DefaultBrowser := Edge
 ```
 
-> ##### 2. Add a new _Website_ object to the 'Websites.ahk' script
+#### Websites.ahk
 
-###### *Website* arguments:
+> ##### Add a new _Website_ object
+
+###### Arguments:
 1. Title: Must match the icon name, without extension. Case insensitive.
 2. HomeURL: It will be open when the text box is blank.
 3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
 
 ```
-ExampleWebSearch := Website(
+ExampleWeb := Website(
     "ExampleWeb",
     "https://example.com",
     "https://example.com/search_query=" Website.TermTemplate "&order=ASC"
 )
 ```
 
-> ##### 3. Add the corresponding [hotkey](https://www.autohotkey.com/docs/v2/Hotkeys.htm) in the 'Main.ahk' script
+#### Main.ahk
 
-###### ShowSearchBar() arguments:
-1. The _Website_ object.
-2. The web browser that will be used (optional, default if omitted).
-3. Open in private / incognito (optional, default 'False').
-4. Multiline input (optional, default 'False').
-
+> ##### Add the search hotkey
 ```
->^X Up:: ShowSearchBar(ExampleWebSearch, Vivaldi) ; Right Control + X
+; Right Control + X => Search in ExampleWeb
+>^X Up:: ShowSearchBar(ExampleWeb)
 ```
 
-> ##### 4. Reload and test the script
-> _Right Control + X_
-[![ExampleWeb screenshot](./screenshots/exampleweb.png)](./screenshots/exampleweb.png)
+> ##### Add a direct link hotkey
+
+```
+; Right Control + A => Open Azure in a private Firefox window
+>^A Up:: OpenURL('https://azure.microsoft.com', Firefox, True)
+```
+
+#### Reload and test the script
+[![Reload Script screenshot](./screenshots/reload.png)](./screenshots/reload.png)
 
 ---
 
 <a name="atributions"></a>
-## Attributions
+## 4. Attributions
 
 #### Icons:
 <a href="https://www.flaticon.es/iconos-gratis/mozilla" title="mozilla iconos">Mozilla iconos created by Freepik - Flaticon</a>

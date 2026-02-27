@@ -11,13 +11,18 @@ class BrowserClass {
     }
 }
 
-; Search options
+; VARIABLES
+; 'en' | 'es' | 'de' | 'ja' ...
+TranslationTargetLang := "en"
+
 DefaultPrivate := False
 
 ; Web browsers ("Name", ".exe")
 Edge := BrowserClass("Edge", "msedge")
-Brave := BrowserClass("Brave", "brave")
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
+Firefox := BrowserClass("Firefox", "firefox")
+Brave := BrowserClass("Brave", "brave")
+Chrome := BrowserClass("Chrome", "chrome")
 
 ; Setting the default browser
 DefaultBrowser := Edge
