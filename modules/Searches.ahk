@@ -1,8 +1,11 @@
+EditSearchTerm := ""
+
 ; Creates and displays the web search bar for the indicated website
 ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivate, Multiline := False) {
     global SearchGui
+    global EditSearchTerm
     if IsSet(SearchGui)
-        DestroySearchBar()
+        DestroySearchBar(SearchGui.Multiline == Multiline)
 
     SetIcon(WebsiteObj.Title)
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner", WebsiteObj.Title)
@@ -14,19 +17,23 @@ ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivat
     SearchGui.Browser := BrowserObj
     SearchGui.OnEvent("Close", GuiObj => DestroySearchBar())
     SearchGui.SetFont("s13 c25003E", "Tahoma")
-    EditSearch := SearchGui.AddEdit("+WantTab vEditSearchTerm x0 y0 w444 " (!Multiline ? "-WantReturn" : "r5"))
+    EditSearch := SearchGui.AddEdit("+WantTab vEditSearchTerm x0 y0 w444 " (!Multiline ? "-WantReturn" : "r5"), EditSearchTerm)
     SearchGui.Show("w444 h" (!Multiline ? SearchGuiHeight : MultilineSearchGuiHeight))
 
     SearchGui.SetFont("s9 c25003E", "Tahoma")
     SearchGui.AddStatusBar("vStatusBar x30 y20")
     ControlFocus EditSearch
+    Send "{Right}"
     SetStatusBarIcon()
     SetStatusBarText()
 }
 
 ; Destroys the search bar
-DestroySearchBar() {
+DestroySearchBar(SaveSearchTerm := False) {
     global SearchGui
+    global EditSearchTerm
+
+    EditSearchTerm := !SaveSearchTerm ? "" : SearchGui['EditSearchTerm'].Value
     Try
         SearchGui.Destroy()
     SearchGui := unset
