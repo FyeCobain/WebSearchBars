@@ -1,4 +1,4 @@
-# Windows Web Search Bars :globe_with_meridians::mag:
+# Web Search Bars :globe_with_meridians::mag:
 
 <a name="requirements"></a>
 ## Requirements
