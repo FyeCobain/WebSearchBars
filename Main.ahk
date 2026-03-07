@@ -2,10 +2,10 @@
 #Requires AutoHotkey v2.0
 
 ; INCLUDES
-#Include %A_WorkingDir%\modules\Config.ahk
-#Include %A_WorkingDir%\modules\Browsers.ahk
-#Include %A_WorkingDir%\modules\Websites.ahk
-#Include %A_WorkingDir%\modules\Searches.ahk
+#Include modules\Config.ahk
+#Include modules\Browsers.ahk
+#Include modules\Websites.ahk
+#Include modules\Searches.ahk
 
 ; CONTEXT-SENSITIVE HOTKEYS
 #HotIf IsSet(SearchGui)
@@ -28,7 +28,6 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 
 ; Open URLs
 >^R Up:: OpenURL("https://github.com/FyeCobain/WebSearchBars") ; 'Right Control + R' => Open repository in the default browser
->^N Up:: OpenURL("https://www.netflix.com", Brave, true) ; 'Right Control + N' => Open Netflix in a private Brave window
 
 ; Show web search bars
 >^O Up:: ShowSearchBar(DirectURL) ; 'Right Control + O' => Open URL

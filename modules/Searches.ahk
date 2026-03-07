@@ -95,6 +95,8 @@ SetStatusBarText() {
 SubmitSearch() {
     SearchTerm := SearchGui['EditSearchTerm'].Value
     WebsiteObj := SearchGui.WebsiteObj
+    if !WebsiteObj.HomeURL && !Trim(SearchTerm)
+        Return
     Private := SearchGui.Private
     Browser := SearchGui.Browser
 
