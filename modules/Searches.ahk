@@ -1,4 +1,5 @@
 EditSearchTerm := ""
+FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp"
 
 ; Creates and displays the web search bar for the indicated website
 ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivate, Multiline := False) {
@@ -34,7 +35,7 @@ DestroySearchBar(SaveSearchTerm := False) {
     global EditSearchTerm
 
     EditSearchTerm := !SaveSearchTerm ? "" : SearchGui['EditSearchTerm'].Value
-    Try
+    try
         SearchGui.Destroy()
     SearchGui := unset
 }
@@ -43,7 +44,7 @@ DestroySearchBar(SaveSearchTerm := False) {
 ChangeBrowser(Backward := True) {
     global DefaultBrowser
     CurrentBrowserIndex := 1
-    For Index, Browser in BrowserClass.Browsers
+    for Index, Browser in BrowserClass.Browsers
         if Browser == SearchGui.Browser {
             CurrentBrowserIndex := Index
             break
@@ -79,13 +80,12 @@ TogglePrivateSearch(FirstExecution := False) {
 }
 
 SetStatusBarIcon() {
-    Try {
+    try
         SearchGui['StatusBar'].SetIcon(A_WorkingDir "\icons\" SearchGui.Browser.Name ".ico")
-    }
 }
 
 SetStatusBarText() {
-    Try {
+    try {
         Exe := Trim(StrLower(SearchGui.Browser.Exe))
         SearchGui['StatusBar'].SetText(SearchGui.Browser.Name (!SearchGui.Private ? "" : (" - " (RegExMatch(Exe, "i)Firefox|Waterfox|LibreWolf|Floorp|msedge") ? "Private" : "Incognito" ))))
     }
@@ -96,7 +96,7 @@ SubmitSearch() {
     SearchTerm := SearchGui['EditSearchTerm'].Value
     WebsiteObj := SearchGui.WebsiteObj
     if !WebsiteObj.HomeURL && !Trim(SearchTerm)
-        Return
+        return
     Private := SearchGui.Private
     Browser := SearchGui.Browser
 
@@ -119,15 +119,45 @@ OpenURL(URL, Browser := DefaultBrowser, Private := False) {
 
     if RegExMatch(Browser.Exe, "i)msedge")
         Command := Browser.Exe ".exe " (Private ? "-inprivate " URL : URL)
-    else if RegExMatch(Browser.Exe, "i)Firefox|Waterfox|LibreWolf|Floorp")
+    else if RegExMatch(Browser.Exe, FirefoxBasedRegEx)
         Command := Browser.Exe ".exe " (Private ? "--private-window " URL : URL)
     else
         Command := Browser.Exe ".exe " (Private ? "-incognito " URL : URL)
 
     try {
         Run Command
+        MaximizeNewWindow(Browser.Exe)
     }
     catch {
         MsgBox Browser.Exe ".exe not found", "Error", 16 + 4096
     }
+}
+
+; Waits for a new browser window to open for a few seconds and then maximizes it
+MaximizeNewWindow(BrowserExe) {
+    ; Find all windows in the current browser
+    BrowserExe := RegExReplace(BrowserExe, ".+\\")
+    BrowserWindowsIds := []
+    for Id in WinGetList("ahk_exe i)" BrowserExe "\.exe")
+        BrowserWindowsIds.Push(Id)
+
+    Sleep 500
+
+    NewIdFound := False
+    StartSearchTime := A_TickCount
+    loop
+        for NewId in WinGetList("ahk_exe i)" BrowserExe "\.exe") {
+            for Id in BrowserWindowsIds
+                if NewId == Id
+                    continue 2
+            NewIdFound := NewId
+            break 2
+        }        
+    until NewIdFound || A_TickCount >= StartSearchTime + 3000
+
+    if !NewIdFound
+        return
+
+    try
+        WinMaximize "ahk_id " NewIdFound
 }

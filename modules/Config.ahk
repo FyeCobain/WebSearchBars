@@ -1,7 +1,3 @@
-; DIRECTIVES
-#SingleInstance Force
-#NoTrayIcon
-
 ; CONFIGURTATION
 SetIcon()
 A_IconHidden := False
@@ -36,7 +32,7 @@ ToggleRunOnStartup()
 
 ; Sets the current icon
 SetIcon(IconName := "search") {
-    Try
+    try
         TraySetIcon(A_WorkingDir "\icons\" IconName ".ico", , True)
 }
 

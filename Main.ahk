@@ -1,5 +1,7 @@
-﻿; DIRECTIVES
-#Requires AutoHotkey v2.0
+﻿; DIRECTIVES / CONFIGURATION
+#SingleInstance Force
+#NoTrayIcon
+SetTitleMatchMode "RegEx"
 
 ; INCLUDES
 #Include modules\Config.ahk
