@@ -128,9 +128,8 @@ OpenURL(URL, Browser := DefaultBrowser, Private := False) {
         Run Command
         MaximizeNewWindow(Browser.Exe)
     }
-    catch {
+    catch
         MsgBox Browser.Exe ".exe not found", "Error", 16 + 4096
-    }
 }
 
 ; Waits for a new browser window to open for a few seconds and then maximizes it
@@ -145,7 +144,7 @@ MaximizeNewWindow(BrowserExe) {
 
     NewIdFound := False
     StartSearchTime := A_TickCount
-    loop
+    loop {
         for NewId in WinGetList("ahk_exe i)" BrowserExe "\.exe") {
             for Id in BrowserWindowsIds
                 if NewId == Id
@@ -153,7 +152,7 @@ MaximizeNewWindow(BrowserExe) {
             NewIdFound := NewId
             break 2
         }        
-    until NewIdFound || A_TickCount >= StartSearchTime + 3000
+    } until NewIdFound || A_TickCount >= StartSearchTime + 3000
 
     if !NewIdFound
         return
