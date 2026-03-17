@@ -25,6 +25,12 @@ Ecosia := Website(
     "https://www.ecosia.org/search?method=index&q=" . Website.TermTemplate
 )
 
+DuckDuckGo := Website(
+    "DuckDuckGo",
+    "https://duckduckgo.com/",
+    "duckduckgo.com/?q=" . Website.TermTemplate
+)
+
 Google := Website(
     "Google",
     "https://www.google.com",

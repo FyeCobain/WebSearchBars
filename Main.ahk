@@ -34,6 +34,7 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 ; Show web search bars
 >^O Up:: ShowSearchBar(DirectURL) ; 'Right Control + O' => Open URL
 >^E Up:: ShowSearchBar(Ecosia) ; 'Right Control + E' => Ecosia
+>^D Up:: ShowSearchBar(DuckDuckGo) ; 'Right Control + D' => DuckDuckGo
 >^G Up:: ShowSearchBar(Google) ; 'Right ontrol + G' => Google
 >^T Up:: ShowSearchBar(Translate) ; 'Right ontrol + T' => Google Translate
 >^I Up:: ShowSearchBar(Images, Brave, True) ; 'Right Control + I' => Google Images in Brave, default in private mode
