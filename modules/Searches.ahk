@@ -1,3 +1,24 @@
+; Verifying that the specified browsers are actually installed
+InstalledExes := []
+Loop Reg "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths", "K"
+    InstalledExes.Push(A_LoopRegName)
+Loop Reg "HKCU\Software\Microsoft\Windows\CurrentVersion\App Paths", "K"
+    InstalledExes.Push(A_LoopRegName)
+
+InstalledBrowsers := []
+for _, Browser in BrowserClass.Browsers
+    if !InStr(Browser.Exe, ":") {
+        for _, InstalledExe in InstalledExes
+            if InStr(InstalledExe, Browser.Exe) {
+                InstalledBrowsers.Push(Browser)
+                break
+            }
+    }
+    else if FileExist(Browser.Exe ".exe")
+        InstalledBrowsers.Push(Browser)
+
+BrowserClass.Browsers := InstalledBrowsers
+
 EditSearchTerm := ""
 FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp"
 
@@ -129,7 +150,7 @@ OpenURL(URL, Browser := DefaultBrowser, Private := False) {
         MaximizeNewWindow(Browser.Exe)
     }
     catch
-        MsgBox Browser.Exe ".exe not found", "Error", 16 + 4096
+        MsgBox Browser.Exe (InStr(Browser.Exe, ".exe") ? "" : ".exe") " not found", "Error", 16 + 4096
 }
 
 ; Waits for a new browser window to open for a few seconds and then maximizes it

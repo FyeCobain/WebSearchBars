@@ -82,11 +82,18 @@ TranslationTargetLang := "en"
 ```
 
 > ##### Add browsers
+
+###### Arguments:
+1. Name: Must match the icon name, case insensitive.
+2. exe: as you would open it from the "Windows + R" dialog.
+
 ```
 ; ("Name", ".exe")
 Waterfox := BrowserClass("Waterfox", "waterfox")
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ```
+
+> :exclamation: If a browser is not actually installed, it will not appear as an option in the search bar
 
 > ##### Set the default web browser
 ```
@@ -99,7 +106,7 @@ DefaultBrowser := Edge
 > ##### Add a new _Website_ object
 
 ###### Arguments:
-1. Title: Must match the icon name, without extension. Case insensitive.
+1. Title: Must match the icon name, case insensitive.
 2. HomeURL: It will be open when the text box is blank.
 3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
 
