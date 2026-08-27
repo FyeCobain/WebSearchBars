@@ -32,7 +32,7 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 >^R Up:: OpenURL("https://github.com/FyeCobain/WebSearchBars") ; 'Right Control + R' => Open repository in the default browser
 
 ; Show web search bars
->^O Up:: ShowSearchBar(DirectURL) ; 'Right Control + O' => Open URL
+>^O Up:: ShowSearchBar(Open) ; 'Right Control + O' => Open URL
 >^E Up:: ShowSearchBar(Ecosia) ; 'Right Control + E' => Ecosia
 >^D Up:: ShowSearchBar(DuckDuckGo) ; 'Right Control + D' => DuckDuckGo
 >^G Up:: ShowSearchBar(Google) ; 'Right ontrol + G' => Google

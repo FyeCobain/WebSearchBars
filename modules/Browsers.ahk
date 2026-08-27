@@ -20,6 +20,8 @@ DefaultPrivate := False
 ; Web browsers ("Name", ".exe")
 Edge := BrowserClass("Edge", "msedge")
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
+Waterfox := BrowserClass("Waterfox", "waterfox")
+Floorp := BrowserClass("Floorp", "floorp")
 Firefox := BrowserClass("Firefox", "firefox")
 Brave := BrowserClass("Brave", "brave")
 Chrome := BrowserClass("Chrome", "chrome")

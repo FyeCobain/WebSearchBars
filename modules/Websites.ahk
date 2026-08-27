@@ -17,7 +17,7 @@ class Website {
 }
 
 ; Websites
-DirectURL := Website("Open URL", "", "")
+Open := Website("Open", "", "")
 
 Ecosia := Website(
     "Ecosia",
