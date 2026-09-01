@@ -31,9 +31,9 @@ ToggleRunOnStartup()
 ToggleRunOnStartup()
 
 ; Sets the current icon
-SetIcon(IconName := "search") {
+SetIcon(IconName := "search.ico") {
     try
-        TraySetIcon(A_WorkingDir "\icons\" IconName ".ico", , True)
+        TraySetIcon(A_WorkingDir "\icons\" IconName, , True)
 }
 
 ; Suspend / Unsuspend script
@@ -42,7 +42,7 @@ SuspendScript() {
     if A_IsSuspended {
         A_TrayMenu.SetIcon("Suspend Hotkeys", "Shell32.dll", 138)
         A_TrayMenu.Rename("Suspend Hotkeys", "Unsuspend Hotkeys")
-        SetIcon("suspended")
+        SetIcon("suspended.ico")
     }
     else {
         A_TrayMenu.SetIcon("Unsuspend Hotkeys", "Shell32.dll", 28)

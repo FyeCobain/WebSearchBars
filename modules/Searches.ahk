@@ -18,7 +18,7 @@ for _, Browser in BrowserClass.Browsers
         InstalledBrowsers.Push(Browser)
 
 BrowserClass.Browsers := InstalledBrowsers
-
+DefaultBrowser := BrowserClass.Browsers[1]
 EditSearchTerm := ""
 FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp"
 
@@ -29,7 +29,7 @@ ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivat
     if IsSet(SearchGui)
         DestroySearchBar(SearchGui.Multiline == Multiline)
 
-    SetIcon(WebsiteObj.Title)
+    SetIcon(WebsiteObj.Icon)
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner", WebsiteObj.Title)
     SetIcon()
     WinSetTransparent 245
@@ -102,7 +102,7 @@ TogglePrivateSearch(FirstExecution := False) {
 
 SetStatusBarIcon() {
     try
-        SearchGui['StatusBar'].SetIcon(A_WorkingDir "\icons\" SearchGui.Browser.Name ".ico")
+        SearchGui['StatusBar'].SetIcon(A_WorkingDir "\icons\" SearchGui.Browser.Icon)
 }
 
 SetStatusBarText() {
@@ -133,7 +133,7 @@ SubmitSearch() {
 }
 
 ; Opens the URL in the given mode and browser
-OpenURL(URL, Browser := DefaultBrowser, Private := False) {
+OpenURL(URL, Browser := DefaultBrowser, Private := DefaultPrivate) {
     URL := StrReplace(URL, "`n", "%0A")
     URL := StrReplace(URL, '"', '\"')
     URL := '"' . URL . '"'
@@ -150,7 +150,7 @@ OpenURL(URL, Browser := DefaultBrowser, Private := False) {
         MaximizeNewWindow(Browser.Exe)
     }
     catch
-        MsgBox Browser.Exe (InStr(Browser.Exe, ".exe") ? "" : ".exe") " not found", "Error", 16 + 4096
+        MsgBox Browser.Name " exe not found", "Error", 16 + 4096
 }
 
 ; Waits for a new browser window to open for a few seconds and then maximizes it

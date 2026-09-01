@@ -1,3 +1,13 @@
+; Web browsers ("Name", ".exe")
+LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
+Waterfox := BrowserClass("Waterfox", "waterfox")
+Floorp := BrowserClass("Floorp", "floorp")
+Firefox := BrowserClass("Firefox", "firefox")
+Brave := BrowserClass("Brave", "brave")
+Vivaldi := BrowserClass("Vivaldi", "vivaldi")
+Chrome := BrowserClass("Chrome", "chrome")
+Edge := BrowserClass("Edge", "msedge")
+
 ; 'Browser' class
 class BrowserClass {
     ; Static attributes
@@ -6,25 +16,8 @@ class BrowserClass {
     ; Constructor
     __New(Name, Exe) {
         this.Name := Name
+        this.Icon := "/browsers/" StrLower(Name) ".ico"
         this.Exe := StrReplace(Exe, ".exe", , True)
         BrowserClass.Browsers.Push(this)
     }
 }
-
-; VARIABLES
-; 'en' | 'es' | 'de' | 'ja' ...
-TranslationTargetLang := "en"
-
-DefaultPrivate := False
-
-; Web browsers ("Name", ".exe")
-Edge := BrowserClass("Edge", "msedge")
-LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
-Waterfox := BrowserClass("Waterfox", "waterfox")
-Floorp := BrowserClass("Floorp", "floorp")
-Firefox := BrowserClass("Firefox", "firefox")
-Brave := BrowserClass("Brave", "brave")
-Chrome := BrowserClass("Chrome", "chrome")
-
-; Setting the default browser
-DefaultBrowser := Edge

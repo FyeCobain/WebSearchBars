@@ -37,5 +37,5 @@ Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
 >^D Up:: ShowSearchBar(DuckDuckGo) ; 'Right Control + D' => DuckDuckGo
 >^G Up:: ShowSearchBar(Google) ; 'Right ontrol + G' => Google
 >^T Up:: ShowSearchBar(Translate) ; 'Right ontrol + T' => Google Translate
->^I Up:: ShowSearchBar(Images, Brave, True) ; 'Right Control + I' => Google Images in Brave, default in private mode
+>^I Up:: ShowSearchBar(Images, , True) ; 'Right Control + I' => Google Images, default in private mode
 >^Y Up:: ShowSearchBar(YouTube) ; 'Right Control + Y' => YouTube in Edge

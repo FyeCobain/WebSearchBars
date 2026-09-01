@@ -75,13 +75,11 @@ Control + Enter => Submit multiline search
 <a name="basic-config"></a>
 #### Browsers.ahk
 
-> ##### Set the translation target language
-```
-; 'en' | 'es' | 'de' | 'ja' ...
-TranslationTargetLang := "en"
-```
+> ##### Add more browsers
 
-> ##### Add browsers
+###### Files:
+1. Install the browser in your system
+2. Place the icon in the icons/browsers directory
 
 ###### Arguments:
 1. Name: Must match the icon name, case insensitive.
@@ -95,15 +93,27 @@ LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe
 
 > :exclamation: If a browser is not actually installed, it will not appear as an option in the search bar
 
-> ##### Set the default web browser
-```
-; Edge | Firefox | LibreWolf | Chrome | Vivaldi ...
-DefaultBrowser := Edge
-```
+> :pushpin: The first browser will be the default browser
+
+---
 
 #### Websites.ahk
 
+> ##### Set the translation target language
+```
+; 'en' | 'es' | 'de' | 'ja' ...
+TranslationTargetLang := "en"
+```
+
+> ##### By default not private / incognito mode
+```
+DefaultPrivate := False
+```
+
 > ##### Add a new _Website_ object
+
+###### Files:
+1. Place the icon in the icons/websites directory
 
 ###### Arguments:
 1. Title: Must match the icon name, case insensitive.
@@ -118,6 +128,8 @@ ExampleWeb := Website(
 )
 ```
 
+---
+
 #### Main.ahk
 
 > ##### Add the search hotkey
@@ -127,11 +139,13 @@ ExampleWeb := Website(
 ```
 
 > ##### Add a direct link hotkey
-
 ```
+
 ; Right Control + A => Open Azure in a private Firefox window
 >^A Up:: OpenURL('https://azure.microsoft.com', Firefox, True)
 ```
+
+---
 
 #### Reload and test the script
 [![Reload Script screenshot](./screenshots/reload.png)](./screenshots/reload.png)
