@@ -5,6 +5,9 @@ TranslationTargetLang := "en"
 DefaultPrivate := False
 
 ; Websites
+; 1. Title: Must match the icon name, case insensitive.
+; 2. HomeURL: It will open when the text box is empty.
+; 3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
 Open := Website("Open", "", "")
 
 Ecosia := Website(
@@ -42,22 +45,3 @@ YouTube := Website(
     "https://www.youtube.com",
     "https://www.youtube.com/results?search_query=" . Website.TermTemplate
 )
-
-; 'Website' class
-class Website {
-    ; Static attributes
-    static TermTemplate := "A_TermTemplate_" A_TickCount
-
-    ; Constructor
-    __New(Title, HomeURL, SearchURL) {
-        this.Title := Title
-        this.Icon := "/websites/" StrLower(Title) ".ico"
-        this.HomeURL := HomeURL
-        this.SearchURL := SearchURL
-    }
-
-    ; Creates and returns the search URL
-    GetSearchURL(SearchTerm) {
-        return !this.SearchURL ? SearchTerm : StrReplace(this.SearchURL, Website.TermTemplate, SearchTerm)
-    }
-}

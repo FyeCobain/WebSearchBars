@@ -86,7 +86,6 @@ Control + Enter => Submit multiline search
 2. exe: as you would open it from the "Windows + R" dialog.
 
 ```
-; ("Name", ".exe")
 Waterfox := BrowserClass("Waterfox", "waterfox")
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ```
@@ -117,7 +116,7 @@ DefaultPrivate := False
 
 ###### Arguments:
 1. Title: Must match the icon name, case insensitive.
-2. HomeURL: It will be open when the text box is blank.
+2. HomeURL: It will open when the text box is empty.
 3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
 
 ```

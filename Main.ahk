@@ -5,28 +5,13 @@ SetTitleMatchMode "RegEx"
 
 ; INCLUDES
 #Include modules\Config.ahk
+#Include modules\Classes.ahk
 #Include modules\Browsers.ahk
 #Include modules\Websites.ahk
 #Include modules\Searches.ahk
+#Include modules\Hotkeys.ahk
 
-; CONTEXT-SENSITIVE HOTKEYS
-#HotIf IsSet(SearchGui)
-Esc Up:: DestroySearchBar() ; 'Escape' => Close the search bar
-
-#HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd)
-Alt Up:: ToggleMultilineSearch() ; 'Left Alt' => Toggle multiline search
-RAlt Up:: TogglePrivateSearch() ; 'Right Alt / Alt Gr' => Toggle private search
-+Tab Up:: ChangeBrowser() ; Shift + Tab => Previous browser
-Tab Up:: ChangeBrowser(False) ; Tab => Next browser
-
-#HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && !SearchGui.Multiline
-Enter Up:: SubmitSearch() ; 'Enter' => Submit a single line search
-
-#HotIf IsSet(SearchGui) && WinActive("ahk_id " SearchGui.Hwnd) && SearchGui.Multiline
-^Enter Up:: SubmitSearch() ; 'Control + Enter' => Submit a multiline search
-#HotIf
-
-; HOTKEYS
+; Custom hotkeys
 
 ; Open URLs
 >^R Up:: OpenURL("https://github.com/FyeCobain/WebSearchBars") ; 'Right Control + R' => Open repository in the default browser

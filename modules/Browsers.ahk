@@ -1,4 +1,6 @@
-; Web browsers ("Name", ".exe")
+; Web browsers
+; 1. Name: Must match the icon name, case insensitive.
+; 2. exe: as you would open it from the "Windows + R" dialog.
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 Waterfox := BrowserClass("Waterfox", "waterfox")
 Floorp := BrowserClass("Floorp", "floorp")
@@ -7,17 +9,3 @@ Brave := BrowserClass("Brave", "brave")
 Vivaldi := BrowserClass("Vivaldi", "vivaldi")
 Chrome := BrowserClass("Chrome", "chrome")
 Edge := BrowserClass("Edge", "msedge")
-
-; 'Browser' class
-class BrowserClass {
-    ; Static attributes
-    static Browsers := []
-
-    ; Constructor
-    __New(Name, Exe) {
-        this.Name := Name
-        this.Icon := "/browsers/" StrLower(Name) ".ico"
-        this.Exe := StrReplace(Exe, ".exe", , True)
-        BrowserClass.Browsers.Push(this)
-    }
-}
