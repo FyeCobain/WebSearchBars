@@ -6,8 +6,7 @@ SetTitleMatchMode "RegEx"
 ; INCLUDES
 #Include modules\Config.ahk
 #Include modules\Classes.ahk
-#Include modules\Browsers.ahk
-#Include modules\Websites.ahk
+#Include modules\UserConfig.ahk
 #Include modules\Searches.ahk
 #Include modules\Hotkeys.ahk
 

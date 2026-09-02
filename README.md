@@ -73,7 +73,7 @@ Control + Enter => Submit multiline search
 ## 3. Configuration
 
 <a name="basic-config"></a>
-#### Browsers.ahk
+#### UserConfig.ahk
 
 > ##### Add more browsers
 
@@ -86,7 +86,7 @@ Control + Enter => Submit multiline search
 2. exe: as you would open it from the "Windows + R" dialog.
 
 ```
-Waterfox := BrowserClass("Waterfox", "waterfox")
+Firefox := BrowserClass("Firefox", "firefox")
 LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ```
 
@@ -96,7 +96,6 @@ LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe
 
 ---
 
-#### Websites.ahk
 
 > ##### Set the translation target language
 ```
