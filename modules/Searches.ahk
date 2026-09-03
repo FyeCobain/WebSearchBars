@@ -6,19 +6,19 @@ Loop Reg "HKCU\Software\Microsoft\Windows\CurrentVersion\App Paths", "K"
     InstalledExes.Push(A_LoopRegName)
 
 InstalledBrowsers := []
-for _, Browser in BrowserClass.Browsers
-    if !InStr(Browser.Exe, ":") {
+for _, CurrentBrowser in Browser.Browsers
+    if !InStr(CurrentBrowser.Exe, ":") {
         for _, InstalledExe in InstalledExes
-            if InStr(InstalledExe, Browser.Exe) {
-                InstalledBrowsers.Push(Browser)
+            if InStr(InstalledExe, CurrentBrowser.Exe) {
+                InstalledBrowsers.Push(CurrentBrowser)
                 break
             }
     }
-    else if FileExist(Browser.Exe ".exe")
-        InstalledBrowsers.Push(Browser)
+    else if FileExist(CurrentBrowser.Exe ".exe")
+        InstalledBrowsers.Push(CurrentBrowser)
 
-BrowserClass.Browsers := InstalledBrowsers
-DefaultBrowser := BrowserClass.Browsers[1]
+Browser.Browsers := InstalledBrowsers
+DefaultBrowser := Browser.Browsers[1]
 EditSearchTerm := ""
 FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp"
 
@@ -65,20 +65,20 @@ DestroySearchBar(SaveSearchTerm := False) {
 ChangeBrowser(Backward := True) {
     global DefaultBrowser
     CurrentBrowserIndex := 1
-    for Index, Browser in BrowserClass.Browsers
-        if Browser == SearchGui.Browser {
+    for Index, CurrentBrowser in Browser.Browsers
+        if CurrentBrowser == SearchGui.Browser {
             CurrentBrowserIndex := Index
             break
         }
-    NewBrowserIndex := Mod(CurrentBrowserIndex, BrowserClass.Browsers.Length) + 1
+    NewBrowserIndex := Mod(CurrentBrowserIndex, Browser.Browsers.Length) + 1
     if (Backward)
         if (NewBrowserIndex == 1)
-            NewBrowserIndex := BrowserClass.Browsers.Length - 1
+            NewBrowserIndex := Browser.Browsers.Length - 1
         else if (NewBrowserIndex == 2)
-            NewBrowserIndex := BrowserClass.Browsers.Length
+            NewBrowserIndex := Browser.Browsers.Length
         else
             NewBrowserIndex -= 2
-    SearchGui.Browser := BrowserClass.Browsers[NewBrowserIndex]
+    SearchGui.Browser := Browser.Browsers[NewBrowserIndex]
     DefaultBrowser := SearchGui.Browser
     SetStatusBarIcon()
     SetStatusBarText()
@@ -119,7 +119,7 @@ SubmitSearch() {
     if !WebsiteObj.HomeURL && !Trim(SearchTerm)
         return
     Private := SearchGui.Private
-    Browser := SearchGui.Browser
+    BrowserObj := SearchGui.Browser
 
     if !SearchGui.WebsiteObj
         URL := SearchTerm
@@ -129,28 +129,28 @@ SubmitSearch() {
         URL := SearchGui.WebsiteObj.GetSearchURL(SearchTerm)
 
     DestroySearchBar()
-    OpenURL(URL, Browser, Private)
+    OpenURL(URL, BrowserObj, Private)
 }
 
 ; Opens the URL in the given mode and browser
-OpenURL(URL, Browser := DefaultBrowser, Private := DefaultPrivate) {
+OpenURL(URL, BrowserObj := DefaultBrowser, Private := DefaultPrivate) {
     URL := StrReplace(URL, "`n", "%0A")
     URL := StrReplace(URL, '"', '\"')
     URL := '"' . URL . '"'
 
-    if RegExMatch(Browser.Exe, "i)msedge")
-        Command := Browser.Exe ".exe " (Private ? "-inprivate " URL : URL)
-    else if RegExMatch(Browser.Exe, FirefoxBasedRegEx)
-        Command := Browser.Exe ".exe " (Private ? "--private-window " URL : URL)
+    if RegExMatch(BrowserObj.Exe, "i)msedge")
+        Command := BrowserObj.Exe ".exe " (Private ? "-inprivate " URL : URL)
+    else if RegExMatch(BrowserObj.Exe, FirefoxBasedRegEx)
+        Command := BrowserObj.Exe ".exe " (Private ? "--private-window " URL : URL)
     else
-        Command := Browser.Exe ".exe " (Private ? "-incognito " URL : URL)
+        Command := BrowserObj.Exe ".exe " (Private ? "-incognito " URL : URL)
 
     try {
         Run Command
-        MaximizeNewWindow(Browser.Exe)
+        MaximizeNewWindow(BrowserObj.Exe)
     }
     catch
-        MsgBox Browser.Name " exe not found", "Error", 16 + 4096
+        MsgBox BrowserObj.Name " exe not found", "Error", 16 + 4096
 }
 
 ; Waits for a new browser window to open for a few seconds and then maximizes it

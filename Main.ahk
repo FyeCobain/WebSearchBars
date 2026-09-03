@@ -4,13 +4,13 @@
 SetTitleMatchMode "RegEx"
 
 ; INCLUDES
-#Include modules\Config.ahk
+#Include Config.ahk
+#Include modules\CoreConfig.ahk
 #Include modules\Classes.ahk
-#Include modules\UserConfig.ahk
 #Include modules\Searches.ahk
 #Include modules\Hotkeys.ahk
 
-; Custom hotkeys
+; HOTKEYS
 
 ; Open URLs
 >^R Up:: OpenURL("https://github.com/FyeCobain/WebSearchBars") ; 'Right Control + R' => Open repository in the default browser

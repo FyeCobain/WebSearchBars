@@ -73,21 +73,34 @@ Control + Enter => Submit multiline search
 ## 3. Configuration
 
 <a name="basic-config"></a>
-#### UserConfig.ahk
+#### Config.ahk
 
-> ##### Add more browsers
+> ##### By default not private / incognito mode
+```
+DefaultPrivate := False
+```
+
+> ##### Translation target language
+```
+; 'en' | 'es' | 'de' | 'ja' ...
+TranslationTargetLang := "en"
+```
+
+---
+
+> ##### Adding more browsers
 
 ###### Files:
-1. Install the browser in your system
-2. Place the icon in the icons/browsers directory
+1. Install the browser in your system.
+2. Place the icon in the icons/browsers directory.
 
 ###### Arguments:
 1. Name: Must match the icon name, case insensitive.
 2. exe: as you would open it from the "Windows + R" dialog.
 
 ```
-Firefox := BrowserClass("Firefox", "firefox")
-LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
+Firefox := Browser("Firefox", "firefox")
+LibreWolf := Browser("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ```
 
 > :exclamation: If a browser is not actually installed, it will not appear as an option in the search bar
@@ -96,22 +109,10 @@ LibreWolf := BrowserClass("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe
 
 ---
 
-
-> ##### Set the translation target language
-```
-; 'en' | 'es' | 'de' | 'ja' ...
-TranslationTargetLang := "en"
-```
-
-> ##### By default not private / incognito mode
-```
-DefaultPrivate := False
-```
-
-> ##### Add a new _Website_ object
+> ##### Adding a new search website
 
 ###### Files:
-1. Place the icon in the icons/websites directory
+1. Place the icon in the icons/websites directory.
 
 ###### Arguments:
 1. Title: Must match the icon name, case insensitive.
@@ -122,7 +123,7 @@ DefaultPrivate := False
 ExampleWeb := Website(
     "ExampleWeb",
     "https://example.com",
-    "https://example.com/search_query=" Website.TermTemplate "&order=ASC"
+    "https://example.com/search_by=" Website.TermTemplate "&order=ASC"
 )
 ```
 
@@ -130,17 +131,17 @@ ExampleWeb := Website(
 
 #### Main.ahk
 
-> ##### Add the search hotkey
+> ##### Adding a search hotkey
 ```
 ; Right Control + X => Search in ExampleWeb
 >^X Up:: ShowSearchBar(ExampleWeb)
 ```
 
-> ##### Add a direct link hotkey
+> ##### Adding a direct link hotkey
 ```
 
-; Right Control + A => Open Azure in a private Firefox window
->^A Up:: OpenURL('https://azure.microsoft.com', Firefox, True)
+; Right Control + A => Open Azure in a private LibreWolf window
+>^A Up:: OpenURL("https://azure.microsoft.com", LibreWolf, True)
 ```
 
 ---

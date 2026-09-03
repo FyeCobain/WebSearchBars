@@ -1,5 +1,5 @@
 ; 'Browser' class
-class BrowserClass {
+class Browser {
     ; Static attributes
     static Browsers := []
 
@@ -8,7 +8,7 @@ class BrowserClass {
         this.Name := Name
         this.Icon := "/browsers/" StrLower(Name) ".ico"
         this.Exe := StrReplace(Exe, ".exe", , True)
-        BrowserClass.Browsers.Push(this)
+        Browser.Browsers.Push(this)
     }
 }
 
