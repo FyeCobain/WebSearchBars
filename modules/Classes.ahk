@@ -1,4 +1,3 @@
-; 'Browser' class
 class Browser {
     ; Static attributes
     static Browsers := []
@@ -12,7 +11,6 @@ class Browser {
     }
 }
 
-; 'Website' class
 class Website {
     ; Static attributes
     static TermTemplate := "A_TermTemplate_" A_TickCount

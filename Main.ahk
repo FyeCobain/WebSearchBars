@@ -8,7 +8,7 @@ SetTitleMatchMode "RegEx"
 #Include modules\CoreConfig.ahk
 #Include modules\Classes.ahk
 #Include modules\Searches.ahk
-#Include modules\Hotkeys.ahk
+#Include modules\CoreHotkeys.ahk
 
 ; HOTKEYS
 
