@@ -32,7 +32,7 @@ ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivat
     SetIcon(WebsiteObj.Icon)
     SearchGui := Gui("+LastFound +AlwaysOnTop +Owner", WebsiteObj.Title)
     SetIcon()
-    WinSetTransparent 245
+    WinSetTransparent SearchGuiTransparency
     SearchGui.WebsiteObj := WebsiteObj
     SearchGui.Private := Private
     SearchGui.Multiline := Multiline

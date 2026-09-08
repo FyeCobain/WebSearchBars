@@ -105,7 +105,7 @@ LibreWolf := Browser("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 
 > :exclamation: If a browser is not actually installed, it will not appear as an option in the search bar
 
-> :pushpin: The first browser will be the default browser
+> :bulb: The first browser will be the default browser
 
 ---
 
@@ -126,6 +126,10 @@ ExampleWeb := Website(
     "https://example.com/search_by=" Website.TermTemplate "&order=ASC"
 )
 ```
+
+---
+
+> :wrench: You can change the size and transparency of the search bar by editing the **CoreConfig.ahk** script
 
 ---
 

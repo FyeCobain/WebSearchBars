@@ -2,8 +2,10 @@
 SetIcon()
 A_IconHidden := False
 SplitPath A_AhkPath, , &AHKDir
+
 SearchGuiHeight := 49
 MultilineSearchGuiHeight := 136
+SearchGuiTransparency := 240
 
 ; Tray menu configuration
 A_IconTip := "Web Search Bars"
