@@ -1,26 +1,6 @@
-; Verifying that the specified browsers are actually installed
-InstalledExes := []
-Loop Reg "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths", "K"
-    InstalledExes.Push(A_LoopRegName)
-Loop Reg "HKCU\Software\Microsoft\Windows\CurrentVersion\App Paths", "K"
-    InstalledExes.Push(A_LoopRegName)
-
-InstalledBrowsers := []
-for _, CurrentBrowser in Browser.Browsers
-    if !InStr(CurrentBrowser.Exe, ":") {
-        for _, InstalledExe in InstalledExes
-            if InStr(InstalledExe, CurrentBrowser.Exe) {
-                InstalledBrowsers.Push(CurrentBrowser)
-                break
-            }
-    }
-    else if FileExist(CurrentBrowser.Exe ".exe")
-        InstalledBrowsers.Push(CurrentBrowser)
-
-Browser.Browsers := InstalledBrowsers
-DefaultBrowser := Browser.Browsers[1]
+DefaultBrowser := Browser.GetBrowsers()[1]
 EditSearchTerm := ""
-FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp"
+FirefoxBasedRegEx := "i)Firefox|Waterfox|LibreWolf|Floorp|Zen"
 
 ; Creates and displays the web search bar for the indicated website
 ShowSearchBar(WebsiteObj, BrowserObj := DefaultBrowser, Private := DefaultPrivate, Multiline := False) {
@@ -63,22 +43,24 @@ DestroySearchBar(SaveSearchTerm := False) {
 
 ; Changes the browser by creating a new search bar
 ChangeBrowser(Backward := True) {
+    Browsers := Browser.GetBrowsers()
+
     global DefaultBrowser
     CurrentBrowserIndex := 1
-    for Index, CurrentBrowser in Browser.Browsers
+    for Index, CurrentBrowser in Browsers
         if CurrentBrowser == SearchGui.Browser {
             CurrentBrowserIndex := Index
             break
         }
-    NewBrowserIndex := Mod(CurrentBrowserIndex, Browser.Browsers.Length) + 1
+    NewBrowserIndex := Mod(CurrentBrowserIndex, Browsers.Length) + 1
     if (Backward)
         if (NewBrowserIndex == 1)
-            NewBrowserIndex := Browser.Browsers.Length - 1
+            NewBrowserIndex := Browsers.Length - 1
         else if (NewBrowserIndex == 2)
-            NewBrowserIndex := Browser.Browsers.Length
+            NewBrowserIndex := Browsers.Length
         else
             NewBrowserIndex -= 2
-    SearchGui.Browser := Browser.Browsers[NewBrowserIndex]
+    SearchGui.Browser := Browsers[NewBrowserIndex]
     DefaultBrowser := SearchGui.Browser
     SetStatusBarIcon()
     SetStatusBarText()
