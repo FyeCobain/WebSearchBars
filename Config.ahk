@@ -3,7 +3,7 @@
 DefaultPrivate := False
 
 ; 'en' | 'es' | 'de' | 'ja' ...
-TranslationTargetLang := "en"
+TargetLang := "en"
 
 ; WEB BROWSERS
 
@@ -21,44 +21,46 @@ Chrome := Browser("Chrome", "chrome")
 Edge := Browser("Edge", "msedge")
 
 ; WEBSITES
+TermTemplate := Website.TermTemplate
 
 ; 1. Title: Must match the icon name, case insensitive.
 ; 2. HomeURL: It will open when the text box is empty.
-; 3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
+; 3. SearchURL: The value of 'TermTemplate' will be replaced with the search term.
+
 Open := Website("Open", "", "")
 
 Ecosia := Website(
     "Ecosia",
     "https://www.ecosia.org",
-    "https://www.ecosia.org/search?method=index&q=" . Website.TermTemplate
+    "https://www.ecosia.org/search?method=index&q=" . TermTemplate
 )
 
 DuckDuckGo := Website(
     "DuckDuckGo",
     "https://duckduckgo.com/",
-    "duckduckgo.com/?q=" . Website.TermTemplate
+    "duckduckgo.com/?q=" . TermTemplate
 )
 
 Google := Website(
     "Google",
     "https://www.google.com",
-    "https://www.google.com/search?q=" . Website.TermTemplate
+    "https://www.google.com/search?q=" . TermTemplate
 )
 
 Translate := Website(
     "Translate",
-    "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&op=translate",
-    "https://translate.google.com.mx/?hl=" . TranslationTargetLang . "&sl=auto&tl=" . TranslationTargetLang . "&text=" . Website.TermTemplate . "&op=translate"
+    "https://translate.google.com.mx/?hl=" . TargetLang . "&sl=auto&tl=" . TargetLang . "&op=translate",
+    "https://translate.google.com.mx/?hl=" . TargetLang . "&sl=auto&tl=" . TargetLang . "&text=" . TermTemplate . "&op=translate"
 )
 
 Images := Website(
     "Images",
     "https://images.google.com",
-    "https://www.google.com/search?tbm=isch&q=" . Website.TermTemplate
+    "https://www.google.com/search?tbm=isch&q=" . TermTemplate
 )
 
 YouTube := Website(
     "YouTube",
     "https://www.youtube.com",
-    "https://www.youtube.com/results?search_query=" . Website.TermTemplate
+    "https://www.youtube.com/results?search_query=" . TermTemplate
 )

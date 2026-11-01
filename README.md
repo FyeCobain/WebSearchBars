@@ -83,7 +83,7 @@ DefaultPrivate := False
 > ##### Translation target language
 ```
 ; 'en' | 'es' | 'de' | 'ja' ...
-TranslationTargetLang := "en"
+TargetLang := "en"
 ```
 
 ---
@@ -117,13 +117,13 @@ LibreWolf := Browser("LibreWolf", "C:\Program Files\LibreWolf\librewolf.exe")
 ###### Arguments:
 1. Title: Must match the icon name, case insensitive.
 2. HomeURL: It will open when the text box is empty.
-3. SearchURL: The value of 'Website.TermTemplate' will be replaced with the search term.
+3. SearchURL: The value of 'TermTemplate' will be replaced with the search term.
 
 ```
 ExampleWeb := Website(
     "ExampleWeb",
     "https://example.com",
-    "https://example.com/search_by=" Website.TermTemplate "&order=ASC"
+    "https://example.com/search_by=" . TermTemplate . "&order=ASC"
 )
 ```
 
