@@ -5,6 +5,10 @@ DefaultPrivate := False
 ; 'en' | 'es' | 'de' | 'ja' ...
 TargetLang := "en"
 
+; 'USD' | 'EUR' | 'MXN' | 'JPY' ...
+SourceCurrency := "USD"
+TargetCurrency := "USD"
+
 ; WEB BROWSERS
 
 ; 1. Name: Must match the icon name, case insensitive.
@@ -51,6 +55,12 @@ Translate := Website(
     "Translate",
     "https://translate.google.com.mx/?hl=" . TargetLang . "&sl=auto&tl=" . TargetLang . "&op=translate",
     "https://translate.google.com.mx/?hl=" . TargetLang . "&sl=auto&tl=" . TargetLang . "&text=" . TermTemplate . "&op=translate"
+)
+
+XE := Website(
+    "XE",
+    "https://www.xe.com",
+    "https://www.xe.com/es/currencyconverter/convert/?Amount=" . TermTemplate . "&From=" . StrUpper(SourceCurrency) . "&To=" . StrUpper(TargetCurrency)
 )
 
 Images := Website(
