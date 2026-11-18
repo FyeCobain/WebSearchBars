@@ -21,5 +21,6 @@ SetTitleMatchMode "RegEx"
 >^D Up:: ShowSearchBar(DuckDuckGo) ; 'Right Control + D' => DuckDuckGo
 >^G Up:: ShowSearchBar(Google) ; 'Right ontrol + G' => Google
 >^T Up:: ShowSearchBar(Translate) ; 'Right ontrol + T' => Google Translate
+>^X Up:: ShowSearchBar(XE) ; 'Right ontrol + X' => XE
 >^I Up:: ShowSearchBar(Images, , True) ; 'Right Control + I' => Google Images, default in private mode
 >^Y Up:: ShowSearchBar(YouTube) ; 'Right Control + Y' => YouTube in Edge

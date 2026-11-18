@@ -86,6 +86,13 @@ DefaultPrivate := False
 TargetLang := "en"
 ```
 
+> ##### Source and target currency
+```
+; 'USD' | 'EUR' | 'MXN' | 'JPY' ...
+SourceCurrency := "USD"
+TargetCurrency := "USD"
+```
+
 ---
 
 > ##### Adding more browsers
@@ -137,8 +144,8 @@ ExampleWeb := Website(
 
 > ##### Adding a search hotkey
 ```
-; Right Control + X => Search in ExampleWeb
->^X Up:: ShowSearchBar(ExampleWeb)
+; Right Control + K => Search in ExampleWeb
+>^K Up:: ShowSearchBar(ExampleWeb)
 ```
 
 > ##### Adding a direct link hotkey
